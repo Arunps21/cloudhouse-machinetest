@@ -1,21 +1,25 @@
-import React, { useMemo } from 'react';
+import React, { useMemo } from "react";
 
-const Chart = ({ data, type = 'bar', title, className = '' }) => {
+const Chart = ({ data, type = "bar", title, className = "" }) => {
   // Simple bar chart implementation
   const BarChart = () => {
-    const maxValue = Math.max(...data.map(d => d.value));
-    
+    const maxValue = Math.max(...data.map((d) => d.value));
+
     return (
       <div className="space-y-3">
         {data.map((item, index) => (
           <div key={index} className="space-y-1">
             <div className="flex justify-between text-sm">
-              <span className="text-slate-600 dark:text-slate-400">{item.label}</span>
-              <span className="font-medium text-slate-900 dark:text-white">{item.value}</span>
+              <span className="text-slate-600 dark:text-slate-400">
+                {item.label}
+              </span>
+              <span className="font-medium text-slate-900 dark:text-white">
+                {item.value}
+              </span>
             </div>
             <div className="h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
               <div
-                className={`h-full rounded-full bg-gradient-to-r ${item.color || 'from-indigo-500 to-purple-600'}`}
+                className={`h-full rounded-full bg-gradient-to-r ${item.color || "from-indigo-500 to-purple-600"}`}
                 style={{ width: `${(item.value / maxValue) * 100}%` }}
               />
             </div>
@@ -36,10 +40,10 @@ const Chart = ({ data, type = 'bar', title, className = '' }) => {
           ...item,
           percentage: 0,
           startAngle: 0,
-          endAngle: 0
+          endAngle: 0,
         }));
       }
-      
+
       let currentAngle = 0;
       return data.map((item) => {
         const percentage = (item.value / total) * 100;
@@ -48,7 +52,7 @@ const Chart = ({ data, type = 'bar', title, className = '' }) => {
           ...item,
           percentage: isNaN(percentage) ? 0 : percentage,
           startAngle: currentAngle,
-          endAngle: currentAngle + angle
+          endAngle: currentAngle + angle,
         };
         currentAngle += angle;
         return segment;
@@ -80,18 +84,24 @@ const Chart = ({ data, type = 'bar', title, className = '' }) => {
               />
             </svg>
             <div className="absolute inset-0 flex items-center justify-center flex-col">
-              <span className="text-2xl font-bold text-slate-900 dark:text-white">0</span>
-              <span className="text-xs text-slate-500 dark:text-slate-400">Total</span>
+              <span className="text-2xl font-bold text-slate-900 dark:text-white">
+                0
+              </span>
+              <span className="text-xs text-slate-500 dark:text-slate-400">
+                Total
+              </span>
             </div>
           </div>
-          
+
           {/* Legend */}
           <div className="flex flex-wrap gap-3 justify-center">
             {data.map((item, index) => (
               <div key={index} className="flex items-center gap-1.5">
-                <span 
+                <span
                   className="w-3 h-3 rounded-full"
-                  style={{ backgroundColor: item.strokeColor || getColorByIndex(index) }}
+                  style={{
+                    backgroundColor: item.strokeColor || getColorByIndex(index),
+                  }}
                 />
                 <span className="text-xs text-slate-600 dark:text-slate-400">
                   {item.label} (0)
@@ -130,18 +140,25 @@ const Chart = ({ data, type = 'bar', title, className = '' }) => {
             })}
           </svg>
           <div className="absolute inset-0 flex items-center justify-center flex-col">
-            <span className="text-2xl font-bold text-slate-900 dark:text-white">{total}</span>
-            <span className="text-xs text-slate-500 dark:text-slate-400">Total</span>
+            <span className="text-2xl font-bold text-slate-900 dark:text-white">
+              {total}
+            </span>
+            <span className="text-xs text-slate-500 dark:text-slate-400">
+              Total
+            </span>
           </div>
         </div>
-        
+
         {/* Legend */}
         <div className="flex flex-wrap gap-3 justify-center">
           {segments.map((segment, index) => (
             <div key={index} className="flex items-center gap-1.5">
-              <span 
+              <span
                 className="w-3 h-3 rounded-full"
-                style={{ backgroundColor: segment.strokeColor || getColorByIndex(index) }}
+                style={{
+                  backgroundColor:
+                    segment.strokeColor || getColorByIndex(index),
+                }}
               />
               <span className="text-xs text-slate-600 dark:text-slate-400">
                 {segment.label} ({segment.value})
@@ -154,18 +171,20 @@ const Chart = ({ data, type = 'bar', title, className = '' }) => {
   };
 
   return (
-    <div className={`
+    <div
+      className={`
       bg-white dark:bg-slate-800 
       rounded-xl border border-slate-200 dark:border-slate-700
       p-6 shadow-sm
       ${className}
-    `}>
+    `}
+    >
       {title && (
         <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
           {title}
         </h3>
       )}
-      {type === 'bar' ? <BarChart /> : <DonutChart />}
+      {type === "bar" ? <BarChart /> : <DonutChart />}
     </div>
   );
 };
@@ -173,12 +192,12 @@ const Chart = ({ data, type = 'bar', title, className = '' }) => {
 // Helper function to get colors by index
 const getColorByIndex = (index) => {
   const colors = [
-    '#6366f1', // indigo
-    '#10b981', // emerald
-    '#f59e0b', // amber
-    '#ef4444', // red
-    '#8b5cf6', // purple
-    '#06b6d4', // cyan
+    "#6366f1", // indigo
+    "#10b981", // emerald
+    "#f59e0b", // amber
+    "#ef4444", // red
+    "#8b5cf6", // purple
+    "#06b6d4", // cyan
   ];
   return colors[index % colors.length];
 };

@@ -1,13 +1,13 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { ThemeProvider } from './context/ThemeContext';
-import { ProjectProvider } from './context/ProjectContext';
-import { UIProvider } from './context/UIContext';
-import { MainLayout } from './components/layout';
-import Dashboard from './pages/Dashboard';
-import CreateProject from './pages/CreateProject';
-import ProjectDetails from './pages/ProjectDetails';
-import NotFound from './pages/NotFound';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ThemeProvider } from "./context/ThemeContext";
+import { ProjectProvider } from "./context/ProjectContext";
+import { UIProvider } from "./context/UIContext";
+import { MainLayout } from "./components/layout";
+import Dashboard from "./pages/Dashboard";
+import CreateProject from "./pages/CreateProject";
+import ProjectDetails from "./pages/ProjectDetails";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (

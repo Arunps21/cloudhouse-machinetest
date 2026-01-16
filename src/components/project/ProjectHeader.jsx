@@ -1,9 +1,9 @@
-import React from 'react';
-import { HiCalendar, HiPencilSquare, HiTrash } from 'react-icons/hi2';
-import { Badge, Avatar, AvatarGroup, ProgressBar } from '../common';
-import { getStatusByValue, getPriorityByValue } from '../../data/statuses';
-import { getUserById, getUsersByIds } from '../../data/users';
-import { formatDate, calculateCompletion } from '../../data/mockProjects';
+import React from "react";
+import { HiCalendar, HiPencilSquare, HiTrash } from "react-icons/hi2";
+import { Badge, Avatar, AvatarGroup, ProgressBar } from "../common";
+import { getStatusByValue, getPriorityByValue } from "../../data/statuses";
+import { getUserById, getUsersByIds } from "../../data/users";
+import { formatDate, calculateCompletion } from "../../data/mockProjects";
 
 const ProjectHeader = ({ project, onEdit }) => {
   const status = getStatusByValue(project.status);
@@ -13,16 +13,16 @@ const ProjectHeader = ({ project, onEdit }) => {
   const completion = calculateCompletion(project.tasks);
 
   const statusVariants = {
-    'planned': 'default',
-    'in-progress': 'info',
-    'completed': 'success',
-    'on-hold': 'warning'
+    planned: "default",
+    "in-progress": "info",
+    completed: "success",
+    "on-hold": "warning",
   };
 
   const priorityVariants = {
-    'low': 'default',
-    'medium': 'warning',
-    'high': 'danger'
+    low: "default",
+    medium: "warning",
+    high: "danger",
   };
 
   return (
@@ -45,7 +45,7 @@ const ProjectHeader = ({ project, onEdit }) => {
             {project.description}
           </p>
         </div>
-        
+
         <button
           onClick={onEdit}
           className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white text-sm font-medium rounded-lg hover:from-indigo-600 hover:to-purple-700 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5"
@@ -65,9 +65,15 @@ const ProjectHeader = ({ project, onEdit }) => {
             {completion}%
           </span>
         </div>
-        <ProgressBar value={completion} variant="auto" size="lg" showLabel={false} />
+        <ProgressBar
+          value={completion}
+          variant="auto"
+          size="lg"
+          showLabel={false}
+        />
         <p className="text-xs text-slate-500 dark:text-slate-400 mt-2">
-          {project.tasks?.filter(t => t.status === 'done').length || 0} of {project.tasks?.length || 0} tasks completed
+          {project.tasks?.filter((t) => t.status === "done").length || 0} of{" "}
+          {project.tasks?.length || 0} tasks completed
         </p>
       </div>
 
@@ -96,7 +102,11 @@ const ProjectHeader = ({ project, onEdit }) => {
           </span>
           {projectManager ? (
             <div className="flex items-center gap-2">
-              <Avatar name={projectManager.name} color={projectManager.color} size="sm" />
+              <Avatar
+                name={projectManager.name}
+                color={projectManager.color}
+                size="sm"
+              />
               <span className="text-sm font-medium text-slate-900 dark:text-white">
                 {projectManager.name}
               </span>
@@ -115,7 +125,7 @@ const ProjectHeader = ({ project, onEdit }) => {
             <div className="flex items-center gap-2">
               <AvatarGroup users={assignees} max={4} size="sm" />
               <span className="text-sm text-slate-500 dark:text-slate-400">
-                {assignees.length} member{assignees.length > 1 ? 's' : ''}
+                {assignees.length} member{assignees.length > 1 ? "s" : ""}
               </span>
             </div>
           ) : (
@@ -133,13 +143,17 @@ const ProjectHeader = ({ project, onEdit }) => {
               <span className="text-lg font-bold text-slate-900 dark:text-white">
                 {project.tasks?.length || 0}
               </span>
-              <span className="text-xs text-slate-500 dark:text-slate-400 ml-1">Tasks</span>
+              <span className="text-xs text-slate-500 dark:text-slate-400 ml-1">
+                Tasks
+              </span>
             </div>
             <div>
               <span className="text-lg font-bold text-slate-900 dark:text-white">
                 {project.reminders?.length || 0}
               </span>
-              <span className="text-xs text-slate-500 dark:text-slate-400 ml-1">Reminders</span>
+              <span className="text-xs text-slate-500 dark:text-slate-400 ml-1">
+                Reminders
+              </span>
             </div>
           </div>
         </div>

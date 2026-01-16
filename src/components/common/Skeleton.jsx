@@ -1,30 +1,25 @@
-import React from 'react';
+import React from "react";
 
-const Skeleton = ({ 
-  variant = 'text', 
-  width, 
-  height,
-  className = '' 
-}) => {
+const Skeleton = ({ variant = "text", width, height, className = "" }) => {
   const variants = {
-    text: 'h-4 rounded',
-    title: 'h-6 rounded w-3/4',
-    avatar: 'w-10 h-10 rounded-full',
-    thumbnail: 'w-full aspect-video rounded-lg',
-    card: 'w-full h-40 rounded-xl',
-    button: 'h-10 w-24 rounded-lg'
+    text: "h-4 rounded",
+    title: "h-6 rounded w-3/4",
+    avatar: "w-10 h-10 rounded-full",
+    thumbnail: "w-full aspect-video rounded-lg",
+    card: "w-full h-40 rounded-xl",
+    button: "h-10 w-24 rounded-lg",
   };
 
   return (
     <div
       className={`
-        skeleton
+        bg-gradient-to-r from-slate-200 via-slate-100 to-slate-200 dark:from-slate-700 dark:via-slate-600 dark:to-slate-700 bg-[length:200%_100%] animate-shimmer
         ${variants[variant]}
         ${className}
       `}
-      style={{ 
-        width: width || undefined, 
-        height: height || undefined 
+      style={{
+        width: width || undefined,
+        height: height || undefined,
       }}
     />
   );

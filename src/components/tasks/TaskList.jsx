@@ -1,10 +1,16 @@
-import React, { useState } from 'react';
-import { HiPlus, HiClipboardDocumentList } from 'react-icons/hi2';
-import TaskItem from './TaskItem';
-import TaskForm from './TaskForm';
-import { Button, EmptyState, Modal } from '../common';
+import React, { useState } from "react";
+import { HiPlus, HiClipboardDocumentList } from "react-icons/hi2";
+import TaskItem from "./TaskItem";
+import TaskForm from "./TaskForm";
+import { Button, EmptyState, Modal } from "../common";
 
-const TaskList = ({ tasks = [], projectId, onAddTask, onUpdateTask, onDeleteTask }) => {
+const TaskList = ({
+  tasks = [],
+  projectId,
+  onAddTask,
+  onUpdateTask,
+  onDeleteTask,
+}) => {
   const [showForm, setShowForm] = useState(false);
   const [editingTask, setEditingTask] = useState(null);
 
@@ -33,9 +39,9 @@ const TaskList = ({ tasks = [], projectId, onAddTask, onUpdateTask, onDeleteTask
   };
 
   // Group tasks by status
-  const todoTasks = tasks.filter(t => t.status === 'todo');
-  const inProgressTasks = tasks.filter(t => t.status === 'in-progress');
-  const doneTasks = tasks.filter(t => t.status === 'done');
+  const todoTasks = tasks.filter((t) => t.status === "todo");
+  const inProgressTasks = tasks.filter((t) => t.status === "in-progress");
+  const doneTasks = tasks.filter((t) => t.status === "done");
 
   return (
     <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
@@ -82,7 +88,7 @@ const TaskList = ({ tasks = [], projectId, onAddTask, onUpdateTask, onDeleteTask
                   In Progress ({inProgressTasks.length})
                 </h3>
                 <div className="space-y-2">
-                  {inProgressTasks.map(task => (
+                  {inProgressTasks.map((task) => (
                     <TaskItem
                       key={task.id}
                       task={task}
@@ -103,7 +109,7 @@ const TaskList = ({ tasks = [], projectId, onAddTask, onUpdateTask, onDeleteTask
                   To Do ({todoTasks.length})
                 </h3>
                 <div className="space-y-2">
-                  {todoTasks.map(task => (
+                  {todoTasks.map((task) => (
                     <TaskItem
                       key={task.id}
                       task={task}
@@ -124,7 +130,7 @@ const TaskList = ({ tasks = [], projectId, onAddTask, onUpdateTask, onDeleteTask
                   Completed ({doneTasks.length})
                 </h3>
                 <div className="space-y-2">
-                  {doneTasks.map(task => (
+                  {doneTasks.map((task) => (
                     <TaskItem
                       key={task.id}
                       task={task}
@@ -144,7 +150,7 @@ const TaskList = ({ tasks = [], projectId, onAddTask, onUpdateTask, onDeleteTask
       <Modal
         isOpen={showForm}
         onClose={handleFormClose}
-        title={editingTask ? 'Edit Task' : 'Add New Task'}
+        title={editingTask ? "Edit Task" : "Add New Task"}
         size="md"
       >
         <TaskForm

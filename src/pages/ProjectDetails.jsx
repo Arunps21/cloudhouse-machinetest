@@ -1,25 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { HiArrowLeft, HiTrash } from 'react-icons/hi2';
-import { useProjects } from '../context/ProjectContext';
-import { useUI } from '../context/UIContext';
-import { ProjectHeader, ProjectForm } from '../components/project';
-import { TaskList } from '../components/tasks';
-import { ReminderList } from '../components/reminders';
-import { Button, Modal, EmptyState, Skeleton } from '../components/common';
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { HiArrowLeft, HiTrash } from "react-icons/hi2";
+import { useProjects } from "../context/ProjectContext";
+import { useUI } from "../context/UIContext";
+import { ProjectHeader, ProjectForm } from "../components/project";
+import { TaskList } from "../components/tasks";
+import { ReminderList } from "../components/reminders";
+import { Button, Modal, EmptyState, Skeleton } from "../components/common";
 
 const ProjectDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { 
-    getProject, 
-    loading, 
+  const {
+    getProject,
+    loading,
     deleteProject,
-    addTask, 
-    updateTask, 
+    addTask,
+    updateTask,
     deleteTask,
     addReminder,
-    deleteReminder 
+    deleteReminder,
   } = useProjects();
   const { showToast } = useUI();
 
@@ -51,13 +51,13 @@ const ProjectDetails = () => {
 
   const handleDelete = () => {
     deleteProject(id);
-    showToast('Project deleted successfully', 'success');
-    navigate('/');
+    showToast("Project deleted successfully", "success");
+    navigate("/");
   };
 
   const handleAddTask = (taskData) => {
     addTask(id, taskData);
-    showToast('Task added successfully', 'success');
+    showToast("Task added successfully", "success");
   };
 
   const handleUpdateTask = (taskId, updates) => {
@@ -66,17 +66,17 @@ const ProjectDetails = () => {
 
   const handleDeleteTask = (taskId) => {
     deleteTask(id, taskId);
-    showToast('Task deleted', 'info');
+    showToast("Task deleted", "info");
   };
 
   const handleAddReminder = (reminderData) => {
     addReminder(id, reminderData);
-    showToast('Reminder added successfully', 'success');
+    showToast("Reminder added successfully", "success");
   };
 
   const handleDeleteReminder = (reminderId) => {
     deleteReminder(id, reminderId);
-    showToast('Reminder deleted', 'info');
+    showToast("Reminder deleted", "info");
   };
 
   if (loading) {
@@ -101,7 +101,7 @@ const ProjectDetails = () => {
         <EmptyState
           title="Project not found"
           description="The project you're looking for doesn't exist or has been deleted."
-          action={() => navigate('/')}
+          action={() => navigate("/")}
           actionLabel="Back to Dashboard"
         />
       </div>
@@ -113,13 +113,13 @@ const ProjectDetails = () => {
       {/* Back Button & Actions */}
       <div className="flex items-center justify-between">
         <button
-          onClick={() => navigate('/')}
+          onClick={() => navigate("/")}
           className="flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors"
         >
           <HiArrowLeft className="w-5 h-5" />
           <span className="font-medium">Back to Dashboard</span>
         </button>
-        
+
         <Button
           variant="ghost"
           size="sm"
@@ -132,10 +132,7 @@ const ProjectDetails = () => {
       </div>
 
       {/* Project Header */}
-      <ProjectHeader 
-        project={project} 
-        onEdit={() => setShowEditModal(true)} 
-      />
+      <ProjectHeader project={project} onEdit={() => setShowEditModal(true)} />
 
       {/* Tasks & Reminders */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -160,10 +157,10 @@ const ProjectDetails = () => {
         title="Edit Project"
         size="xl"
       >
-        <ProjectForm 
-          project={project} 
-          isEditing 
-          onClose={() => setShowEditModal(false)} 
+        <ProjectForm
+          project={project}
+          isEditing
+          onClose={() => setShowEditModal(false)}
         />
       </Modal>
 
@@ -176,15 +173,14 @@ const ProjectDetails = () => {
       >
         <div className="space-y-4">
           <p className="text-slate-600 dark:text-slate-400">
-            Are you sure you want to delete <strong className="text-slate-900 dark:text-white">{project.name}</strong>? 
-            This action cannot be undone.
+            Are you sure you want to delete{" "}
+            <strong className="text-slate-900 dark:text-white">
+              {project.name}
+            </strong>
+            ? This action cannot be undone.
           </p>
           <div className="flex gap-3">
-            <Button
-              variant="danger"
-              onClick={handleDelete}
-              fullWidth
-            >
+            <Button variant="danger" onClick={handleDelete} fullWidth>
               Delete Project
             </Button>
             <Button

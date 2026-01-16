@@ -1,29 +1,24 @@
-import React from 'react';
-import Avatar from './Avatar';
+import React from "react";
+import Avatar from "./Avatar";
 
-const AvatarGroup = ({ 
-  users = [], 
-  max = 3, 
-  size = 'md',
-  className = '' 
-}) => {
+const AvatarGroup = ({ users = [], max = 3, size = "md", className = "" }) => {
   const displayUsers = users.slice(0, max);
   const remainingCount = users.length - max;
 
   const overlapClasses = {
-    xs: '-ml-1.5',
-    sm: '-ml-2',
-    md: '-ml-3',
-    lg: '-ml-4',
-    xl: '-ml-5'
+    xs: "-ml-1.5",
+    sm: "-ml-2",
+    md: "-ml-3",
+    lg: "-ml-4",
+    xl: "-ml-5",
   };
 
   const countSizes = {
-    xs: 'w-6 h-6 text-xs',
-    sm: 'w-8 h-8 text-xs',
-    md: 'w-10 h-10 text-sm',
-    lg: 'w-12 h-12 text-base',
-    xl: 'w-16 h-16 text-lg'
+    xs: "w-6 h-6 text-xs",
+    sm: "w-8 h-8 text-xs",
+    md: "w-10 h-10 text-sm",
+    lg: "w-12 h-12 text-base",
+    xl: "w-16 h-16 text-lg",
   };
 
   return (
@@ -31,7 +26,7 @@ const AvatarGroup = ({
       {displayUsers.map((user, index) => (
         <div
           key={user.id}
-          className={index > 0 ? overlapClasses[size] : ''}
+          className={index > 0 ? overlapClasses[size] : ""}
           style={{ zIndex: displayUsers.length - index }}
         >
           <Avatar

@@ -1,36 +1,36 @@
-import React, { useState } from 'react';
-import { HiPlus, HiBell } from 'react-icons/hi2';
-import ReminderItem from './ReminderItem';
-import { Button, EmptyState, Modal, Input, TextArea } from '../common';
+import React, { useState } from "react";
+import { HiPlus, HiBell } from "react-icons/hi2";
+import ReminderItem from "./ReminderItem";
+import { Button, EmptyState, Modal, Input, TextArea } from "../common";
 
 const ReminderList = ({ reminders = [], onAddReminder, onDeleteReminder }) => {
   const [showForm, setShowForm] = useState(false);
-  const [formData, setFormData] = useState({ date: '', description: '' });
-  const [error, setError] = useState('');
+  const [formData, setFormData] = useState({ date: "", description: "" });
+  const [error, setError] = useState("");
 
   // Sort reminders by date
-  const sortedReminders = [...reminders].sort((a, b) => 
-    new Date(a.date) - new Date(b.date)
+  const sortedReminders = [...reminders].sort(
+    (a, b) => new Date(a.date) - new Date(b.date),
   );
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     if (!formData.date || !formData.description.trim()) {
-      setError('Both date and description are required');
+      setError("Both date and description are required");
       return;
     }
 
     onAddReminder(formData);
-    setFormData({ date: '', description: '' });
+    setFormData({ date: "", description: "" });
     setShowForm(false);
-    setError('');
+    setError("");
   };
 
   const handleClose = () => {
     setShowForm(false);
-    setFormData({ date: '', description: '' });
-    setError('');
+    setFormData({ date: "", description: "" });
+    setError("");
   };
 
   return (
@@ -46,7 +46,7 @@ const ReminderList = ({ reminders = [], onAddReminder, onDeleteReminder }) => {
               Reminders
             </h2>
             <p className="text-sm text-slate-500 dark:text-slate-400">
-              {reminders.length} reminder{reminders.length !== 1 ? 's' : ''} set
+              {reminders.length} reminder{reminders.length !== 1 ? "s" : ""} set
             </p>
           </div>
         </div>
@@ -70,7 +70,7 @@ const ReminderList = ({ reminders = [], onAddReminder, onDeleteReminder }) => {
           />
         ) : (
           <div className="space-y-3">
-            {sortedReminders.map(reminder => (
+            {sortedReminders.map((reminder) => (
               <ReminderItem
                 key={reminder.id}
                 reminder={reminder}
@@ -93,22 +93,24 @@ const ReminderList = ({ reminders = [], onAddReminder, onDeleteReminder }) => {
             type="date"
             label="Reminder Date"
             value={formData.date}
-            onChange={(e) => setFormData(prev => ({ ...prev, date: e.target.value }))}
+            onChange={(e) =>
+              setFormData((prev) => ({ ...prev, date: e.target.value }))
+            }
             required
           />
-          
+
           <TextArea
             label="Description"
             value={formData.description}
-            onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
+            onChange={(e) =>
+              setFormData((prev) => ({ ...prev, description: e.target.value }))
+            }
             placeholder="What should you be reminded about?"
             rows={3}
             required
           />
 
-          {error && (
-            <p className="text-sm text-rose-500">{error}</p>
-          )}
+          {error && <p className="text-sm text-rose-500">{error}</p>}
 
           <div className="flex gap-3 pt-2">
             <Button type="submit" variant="primary" fullWidth>

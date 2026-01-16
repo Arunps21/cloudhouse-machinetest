@@ -1,35 +1,39 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { HiCalendar, HiArrowRight } from 'react-icons/hi2';
-import { Badge, AvatarGroup, ProgressBar } from '../common';
-import { getStatusByValue, getPriorityByValue } from '../../data/statuses';
-import { getUsersByIds } from '../../data/users';
-import { calculateCompletion, formatDate, isOverdue } from '../../data/mockProjects';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { HiCalendar, HiArrowRight } from "react-icons/hi2";
+import { Badge, AvatarGroup, ProgressBar } from "../common";
+import { getStatusByValue, getPriorityByValue } from "../../data/statuses";
+import { getUsersByIds } from "../../data/users";
+import {
+  calculateCompletion,
+  formatDate,
+  isOverdue,
+} from "../../data/mockProjects";
 
 const ProjectCard = ({ project }) => {
   const navigate = useNavigate();
-  
+
   const status = getStatusByValue(project.status);
   const priority = getPriorityByValue(project.priority);
   const assignees = getUsersByIds(project.assignees || []);
   const completion = calculateCompletion(project.tasks);
-  const overdue = isOverdue(project.endDate) && project.status !== 'completed';
+  const overdue = isOverdue(project.endDate) && project.status !== "completed";
 
   const statusVariants = {
-    'planned': 'default',
-    'in-progress': 'info',
-    'completed': 'success',
-    'on-hold': 'warning'
+    planned: "default",
+    "in-progress": "info",
+    completed: "success",
+    "on-hold": "warning",
   };
 
   const priorityVariants = {
-    'low': 'default',
-    'medium': 'warning',
-    'high': 'danger'
+    low: "default",
+    medium: "warning",
+    high: "danger",
   };
 
   return (
-    <div 
+    <div
       onClick={() => navigate(`/project/${project.id}`)}
       className="
         group bg-white dark:bg-slate-800 
@@ -56,11 +60,7 @@ const ProjectCard = ({ project }) => {
 
       {/* Progress */}
       <div className="mb-4">
-        <ProgressBar 
-          value={completion} 
-          variant="auto"
-          size="md"
-        />
+        <ProgressBar value={completion} variant="auto" size="md" />
       </div>
 
       {/* Meta Info */}
@@ -70,7 +70,8 @@ const ProjectCard = ({ project }) => {
         </Badge>
         {project.tasks?.length > 0 && (
           <span className="text-xs text-slate-500 dark:text-slate-400">
-            {project.tasks.filter(t => t.status === 'done').length}/{project.tasks.length} tasks
+            {project.tasks.filter((t) => t.status === "done").length}/
+            {project.tasks.length} tasks
           </span>
         )}
       </div>
@@ -78,11 +79,13 @@ const ProjectCard = ({ project }) => {
       {/* Footer */}
       <div className="flex items-center justify-between pt-4 border-t border-slate-100 dark:border-slate-700">
         <AvatarGroup users={assignees} max={3} size="sm" />
-        
-        <div className={`
+
+        <div
+          className={`
           flex items-center gap-1.5 text-xs font-medium
-          ${overdue ? 'text-rose-500' : 'text-slate-500 dark:text-slate-400'}
-        `}>
+          ${overdue ? "text-rose-500" : "text-slate-500 dark:text-slate-400"}
+        `}
+        >
           <HiCalendar className="w-4 h-4" />
           <span>{formatDate(project.endDate)}</span>
           {overdue && <span className="text-rose-500">(Overdue)</span>}

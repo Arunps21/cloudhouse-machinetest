@@ -1,7 +1,7 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { HiHome, HiExclamationTriangle } from 'react-icons/hi2';
-import { Button } from '../components/common';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { HiHome, HiExclamationTriangle } from "react-icons/hi2";
+import { Button } from "../components/common";
 
 const NotFound = () => {
   const navigate = useNavigate();
@@ -24,8 +24,8 @@ const NotFound = () => {
           Page Not Found
         </h2>
         <p className="text-slate-500 dark:text-slate-400 mb-8 max-w-md mx-auto">
-          The page you're looking for doesn't exist or has been moved. 
-          Let's get you back on track.
+          The page you're looking for doesn't exist or has been moved. Let's get
+          you back on track.
         </p>
 
         {/* Actions */}
@@ -34,15 +34,11 @@ const NotFound = () => {
             variant="primary"
             size="lg"
             icon={HiHome}
-            onClick={() => navigate('/')}
+            onClick={() => navigate("/")}
           >
             Go to Dashboard
           </Button>
-          <Button
-            variant="secondary"
-            size="lg"
-            onClick={() => navigate(-1)}
-          >
+          <Button variant="secondary" size="lg" onClick={() => navigate(-1)}>
             Go Back
           </Button>
         </div>

@@ -1,9 +1,15 @@
-import React, { useState } from 'react';
-import { HiMagnifyingGlass, HiFunnel, HiViewColumns, HiListBullet, HiXMark } from 'react-icons/hi2';
-import { Button, Select } from '../common';
-import { projectStatuses, priorities } from '../../data/statuses';
+import React, { useState } from "react";
+import {
+  HiMagnifyingGlass,
+  HiFunnel,
+  HiViewColumns,
+  HiListBullet,
+  HiXMark,
+} from "react-icons/hi2";
+import { Button, Select } from "../common";
+import { projectStatuses, priorities } from "../../data/statuses";
 
-const ProjectFilters = ({ 
+const ProjectFilters = ({
   searchTerm,
   onSearchChange,
   statusFilter,
@@ -13,34 +19,34 @@ const ProjectFilters = ({
   sortBy,
   onSortChange,
   viewMode,
-  onViewModeChange 
+  onViewModeChange,
 }) => {
   const [showFilters, setShowFilters] = useState(false);
 
   const statusOptions = [
-    { value: '', label: 'All Statuses' },
-    ...projectStatuses.map(s => ({ value: s.value, label: s.label }))
+    { value: "", label: "All Statuses" },
+    ...projectStatuses.map((s) => ({ value: s.value, label: s.label })),
   ];
 
   const priorityOptions = [
-    { value: '', label: 'All Priorities' },
-    ...priorities.map(p => ({ value: p.value, label: p.label }))
+    { value: "", label: "All Priorities" },
+    ...priorities.map((p) => ({ value: p.value, label: p.label })),
   ];
 
   const sortOptions = [
-    { value: 'name', label: 'Name' },
-    { value: 'dueDate', label: 'Due Date' },
-    { value: 'priority', label: 'Priority' },
-    { value: 'status', label: 'Status' },
-    { value: 'completion', label: 'Completion' }
+    { value: "name", label: "Name" },
+    { value: "dueDate", label: "Due Date" },
+    { value: "priority", label: "Priority" },
+    { value: "status", label: "Status" },
+    { value: "completion", label: "Completion" },
   ];
 
   const hasActiveFilters = statusFilter || priorityFilter || searchTerm;
 
   const clearFilters = () => {
-    onSearchChange('');
-    onStatusChange('');
-    onPriorityChange('');
+    onSearchChange("");
+    onStatusChange("");
+    onPriorityChange("");
   };
 
   return (
@@ -96,21 +102,21 @@ const ProjectFilters = ({
         {/* View Mode Toggle */}
         <div className="hidden sm:flex items-center gap-1 p-1 bg-slate-100 dark:bg-slate-700 rounded-lg">
           <button
-            onClick={() => onViewModeChange('grid')}
+            onClick={() => onViewModeChange("grid")}
             className={`p-2 rounded-md transition-colors ${
-              viewMode === 'grid' 
-                ? 'bg-white dark:bg-slate-600 shadow-sm text-indigo-600 dark:text-indigo-400' 
-                : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200'
+              viewMode === "grid"
+                ? "bg-white dark:bg-slate-600 shadow-sm text-indigo-600 dark:text-indigo-400"
+                : "text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200"
             }`}
           >
             <HiViewColumns className="w-5 h-5" />
           </button>
           <button
-            onClick={() => onViewModeChange('table')}
+            onClick={() => onViewModeChange("table")}
             className={`p-2 rounded-md transition-colors ${
-              viewMode === 'table' 
-                ? 'bg-white dark:bg-slate-600 shadow-sm text-indigo-600 dark:text-indigo-400' 
-                : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200'
+              viewMode === "table"
+                ? "bg-white dark:bg-slate-600 shadow-sm text-indigo-600 dark:text-indigo-400"
+                : "text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200"
             }`}
           >
             <HiListBullet className="w-5 h-5" />
@@ -140,7 +146,12 @@ const ProjectFilters = ({
             options={sortOptions}
           />
           <div className="flex gap-2">
-            <Button variant="secondary" size="sm" onClick={clearFilters} fullWidth>
+            <Button
+              variant="secondary"
+              size="sm"
+              onClick={clearFilters}
+              fullWidth
+            >
               Clear Filters
             </Button>
           </div>
@@ -153,23 +164,25 @@ const ProjectFilters = ({
           {searchTerm && (
             <span className="inline-flex items-center gap-1 px-3 py-1 bg-indigo-100 dark:bg-indigo-900/50 text-indigo-700 dark:text-indigo-300 rounded-full text-sm">
               Search: "{searchTerm}"
-              <button onClick={() => onSearchChange('')}>
+              <button onClick={() => onSearchChange("")}>
                 <HiXMark className="w-4 h-4" />
               </button>
             </span>
           )}
           {statusFilter && (
             <span className="inline-flex items-center gap-1 px-3 py-1 bg-indigo-100 dark:bg-indigo-900/50 text-indigo-700 dark:text-indigo-300 rounded-full text-sm">
-              Status: {projectStatuses.find(s => s.value === statusFilter)?.label}
-              <button onClick={() => onStatusChange('')}>
+              Status:{" "}
+              {projectStatuses.find((s) => s.value === statusFilter)?.label}
+              <button onClick={() => onStatusChange("")}>
                 <HiXMark className="w-4 h-4" />
               </button>
             </span>
           )}
           {priorityFilter && (
             <span className="inline-flex items-center gap-1 px-3 py-1 bg-indigo-100 dark:bg-indigo-900/50 text-indigo-700 dark:text-indigo-300 rounded-full text-sm">
-              Priority: {priorities.find(p => p.value === priorityFilter)?.label}
-              <button onClick={() => onPriorityChange('')}>
+              Priority:{" "}
+              {priorities.find((p) => p.value === priorityFilter)?.label}
+              <button onClick={() => onPriorityChange("")}>
                 <HiXMark className="w-4 h-4" />
               </button>
             </span>

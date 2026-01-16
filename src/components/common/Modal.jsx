@@ -1,44 +1,43 @@
-import React, { useEffect } from 'react';
-import { HiXMark } from 'react-icons/hi2';
-import { useUI } from '../../context/UIContext';
+import React, { useEffect } from "react";
+import { HiXMark } from "react-icons/hi2";
 
-const Modal = ({ 
-  isOpen, 
-  onClose, 
-  title, 
+const Modal = ({
+  isOpen,
+  onClose,
+  title,
   children,
-  size = 'md',
-  showCloseButton = true 
+  size = "md",
+  showCloseButton = true,
 }) => {
   const sizes = {
-    sm: 'max-w-md',
-    md: 'max-w-lg',
-    lg: 'max-w-2xl',
-    xl: 'max-w-4xl',
-    full: 'max-w-6xl'
+    sm: "max-w-md",
+    md: "max-w-lg",
+    lg: "max-w-2xl",
+    xl: "max-w-4xl",
+    full: "max-w-6xl",
   };
 
   // Lock body scroll when modal is open
   useEffect(() => {
     if (isOpen) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     }
     return () => {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     };
   }, [isOpen]);
 
   // Close on escape key
   useEffect(() => {
     const handleEscape = (e) => {
-      if (e.key === 'Escape' && isOpen) {
+      if (e.key === "Escape" && isOpen) {
         onClose();
       }
     };
-    document.addEventListener('keydown', handleEscape);
-    return () => document.removeEventListener('keydown', handleEscape);
+    document.addEventListener("keydown", handleEscape);
+    return () => document.removeEventListener("keydown", handleEscape);
   }, [isOpen, onClose]);
 
   if (!isOpen) return null;
@@ -46,13 +45,13 @@ const Modal = ({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       {/* Backdrop */}
-      <div 
+      <div
         className="absolute inset-0 bg-black/50 backdrop-blur-sm animate-fadeIn"
         onClick={onClose}
       />
-      
+
       {/* Modal Content */}
-      <div 
+      <div
         className={`
           relative w-full ${sizes[size]} 
           bg-white dark:bg-slate-800 
@@ -79,31 +78,11 @@ const Modal = ({
             )}
           </div>
         )}
-        
+
         {/* Body */}
-        <div className="flex-1 overflow-y-auto px-6 py-4">
-          {children}
-        </div>
+        <div className="flex-1 overflow-y-auto px-6 py-4">{children}</div>
       </div>
     </div>
-  );
-};
-
-// Standalone Modal component that uses UI Context
-export const GlobalModal = () => {
-  const { modalOpen, modalContent, closeModal } = useUI();
-  
-  if (!modalOpen || !modalContent) return null;
-
-  return (
-    <Modal 
-      isOpen={modalOpen} 
-      onClose={closeModal}
-      title={modalContent.title}
-      size={modalContent.size}
-    >
-      {modalContent.content}
-    </Modal>
   );
 };
 

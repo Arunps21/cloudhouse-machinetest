@@ -1,25 +1,29 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { HiCalendar, HiEye } from 'react-icons/hi2';
-import { Badge, AvatarGroup, ProgressBar } from '../common';
-import { getStatusByValue, getPriorityByValue } from '../../data/statuses';
-import { getUsersByIds } from '../../data/users';
-import { calculateCompletion, formatDate, isOverdue } from '../../data/mockProjects';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { HiCalendar, HiEye } from "react-icons/hi2";
+import { Badge, AvatarGroup, ProgressBar } from "../common";
+import { getStatusByValue, getPriorityByValue } from "../../data/statuses";
+import { getUsersByIds } from "../../data/users";
+import {
+  calculateCompletion,
+  formatDate,
+  isOverdue,
+} from "../../data/mockProjects";
 
 const ProjectTable = ({ projects }) => {
   const navigate = useNavigate();
 
   const statusVariants = {
-    'planned': 'default',
-    'in-progress': 'info',
-    'completed': 'success',
-    'on-hold': 'warning'
+    planned: "default",
+    "in-progress": "info",
+    completed: "success",
+    "on-hold": "warning",
   };
 
   const priorityVariants = {
-    'low': 'default',
-    'medium': 'warning',
-    'high': 'danger'
+    low: "default",
+    medium: "warning",
+    high: "danger",
   };
 
   return (
@@ -57,10 +61,11 @@ const ProjectTable = ({ projects }) => {
               const priority = getPriorityByValue(project.priority);
               const assignees = getUsersByIds(project.assignees || []);
               const completion = calculateCompletion(project.tasks);
-              const overdue = isOverdue(project.endDate) && project.status !== 'completed';
+              const overdue =
+                isOverdue(project.endDate) && project.status !== "completed";
 
               return (
-                <tr 
+                <tr
                   key={project.id}
                   onClick={() => navigate(`/project/${project.id}`)}
                   className="hover:bg-slate-50 dark:hover:bg-slate-700/50 cursor-pointer transition-colors"
@@ -81,14 +86,17 @@ const ProjectTable = ({ projects }) => {
                     </Badge>
                   </td>
                   <td className="px-6 py-4">
-                    <Badge variant={priorityVariants[project.priority]} size="sm">
+                    <Badge
+                      variant={priorityVariants[project.priority]}
+                      size="sm"
+                    >
                       {priority?.label}
                     </Badge>
                   </td>
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-3 min-w-32">
-                      <ProgressBar 
-                        value={completion} 
+                      <ProgressBar
+                        value={completion}
                         variant="auto"
                         size="sm"
                         showLabel={false}
@@ -102,16 +110,18 @@ const ProjectTable = ({ projects }) => {
                     <AvatarGroup users={assignees} max={3} size="sm" />
                   </td>
                   <td className="px-6 py-4">
-                    <div className={`
+                    <div
+                      className={`
                       flex items-center gap-1.5 text-sm
-                      ${overdue ? 'text-rose-500 font-medium' : 'text-slate-600 dark:text-slate-400'}
-                    `}>
+                      ${overdue ? "text-rose-500 font-medium" : "text-slate-600 dark:text-slate-400"}
+                    `}
+                    >
                       <HiCalendar className="w-4 h-4" />
                       <span>{formatDate(project.endDate)}</span>
                     </div>
                   </td>
                   <td className="px-6 py-4 text-center">
-                    <button 
+                    <button
                       onClick={(e) => {
                         e.stopPropagation();
                         navigate(`/project/${project.id}`);

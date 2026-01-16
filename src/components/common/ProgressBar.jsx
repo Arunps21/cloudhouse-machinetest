@@ -1,37 +1,37 @@
-import React from 'react';
+import React from "react";
 
-const ProgressBar = ({ 
-  value = 0, 
-  size = 'md',
+const ProgressBar = ({
+  value = 0,
+  size = "md",
   showLabel = true,
-  variant = 'primary',
+  variant = "primary",
   animated = true,
-  className = '' 
+  className = "",
 }) => {
   const sizes = {
-    sm: 'h-1.5',
-    md: 'h-2.5',
-    lg: 'h-4'
+    sm: "h-1.5",
+    md: "h-2.5",
+    lg: "h-4",
   };
 
   const variants = {
-    primary: 'from-indigo-500 to-purple-600',
-    success: 'from-emerald-500 to-teal-500',
-    warning: 'from-amber-500 to-orange-500',
-    danger: 'from-rose-500 to-red-500',
-    info: 'from-blue-500 to-cyan-500'
+    primary: "from-indigo-500 to-purple-600",
+    success: "from-emerald-500 to-teal-500",
+    warning: "from-amber-500 to-orange-500",
+    danger: "from-rose-500 to-red-500",
+    info: "from-blue-500 to-cyan-500",
   };
 
   // Determine color based on value
   const getVariantByValue = () => {
-    if (value >= 100) return 'success';
-    if (value >= 75) return 'primary';
-    if (value >= 50) return 'info';
-    if (value >= 25) return 'warning';
-    return 'danger';
+    if (value >= 100) return "success";
+    if (value >= 75) return "primary";
+    if (value >= 50) return "info";
+    if (value >= 25) return "warning";
+    return "danger";
   };
 
-  const effectiveVariant = variant === 'auto' ? getVariantByValue() : variant;
+  const effectiveVariant = variant === "auto" ? getVariantByValue() : variant;
 
   return (
     <div className={`w-full ${className}`}>
@@ -45,12 +45,14 @@ const ProgressBar = ({
           </span>
         </div>
       )}
-      <div className={`w-full bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden ${sizes[size]}`}>
+      <div
+        className={`w-full bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden ${sizes[size]}`}
+      >
         <div
           className={`
             ${sizes[size]} rounded-full bg-gradient-to-r ${variants[effectiveVariant]}
             transition-all duration-500 ease-out
-            ${animated ? 'progress-bar' : ''}
+            ${animated ? "" : ""}
           `}
           style={{ width: `${Math.min(100, Math.max(0, value))}%` }}
         />

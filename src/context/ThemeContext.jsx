@@ -1,31 +1,31 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect } from "react";
 
 const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
   const [darkMode, setDarkMode] = useState(() => {
     // Check localStorage first
-    const saved = localStorage.getItem('pms_theme');
+    const saved = localStorage.getItem("pms_theme");
     if (saved !== null) {
-      return saved === 'dark';
+      return saved === "dark";
     }
     // Check system preference
-    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    return window.matchMedia("(prefers-color-scheme: dark)").matches;
   });
 
   useEffect(() => {
     // Update document class and localStorage when darkMode changes
     if (darkMode) {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('pms_theme', 'dark');
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("pms_theme", "dark");
     } else {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('pms_theme', 'light');
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("pms_theme", "light");
     }
   }, [darkMode]);
 
   const toggleTheme = () => {
-    setDarkMode(prev => !prev);
+    setDarkMode((prev) => !prev);
   };
 
   return (
@@ -38,7 +38,7 @@ export const ThemeProvider = ({ children }) => {
 export const useTheme = () => {
   const context = useContext(ThemeContext);
   if (!context) {
-    throw new Error('useTheme must be used within a ThemeProvider');
+    throw new Error("useTheme must be used within a ThemeProvider");
   }
   return context;
 };
