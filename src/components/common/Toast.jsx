@@ -47,7 +47,7 @@ const Toast = ({ id, message, type = "info", onClose }) => {
       className={`
         flex items-center gap-3 px-4 py-3 rounded-lg border shadow-lg
         ${config.bg} ${config.border}
-        animate-slideDown
+        animate-slideUp
       `}
     >
       <Icon className={`w-5 h-5 flex-shrink-0 ${config.iconColor}`} />
@@ -67,7 +67,7 @@ export const ToastContainer = ({ toasts, removeToast }) => {
   if (toasts.length === 0) return null;
 
   return (
-    <div className="fixed top-4 right-4 z-50 flex flex-col gap-2 max-w-sm w-full">
+    <div className="fixed bottom-4 right-4 z-50 flex flex-col-reverse gap-2 max-w-sm w-full">
       {toasts.map((toast) => (
         <Toast
           key={toast.id}
